@@ -1,26 +1,27 @@
-Arrow arrows;
+class Arrow{
+  PImage arrow ;
+  final int ArrowLength = 30 ;
+  final int numberOfArrowPerSide = 10 ;
+  final int fixImageOffset = ArrowLength / 2;
 
-void setup (){
-  size(300 , 300) ;
-  imageMode(CENTER);
-  arrows=new Arrow();
+
+void showArrow(){
+  arrow=loadImage("arrow.png");
+ image(arrow,0,0);
 }
 
-void draw(){
-  background(255);
+int currentArrowX(int i){
+  return fixImageOffset  + i * ArrowLength ;
+}
+int currentArrowY(int j){
+  return fixImageOffset  + j * ArrowLength ;
+} 
+void followMouse(int a,int b){  
+  translate(a,b);
+  rotate( atan2(mouseY - b , mouseX - a )) ;
 
-  for (int i = 0  ; i < arrows.numberOfArrowPerSide ; i++){
-    for (int j = 0 ; j < arrows.numberOfArrowPerSide ; j++){
 
-      arrows.currentArrowX(i) ;
-      arrows.currentArrowY(j) ;
+}
 
-      pushMatrix();
 
-      arrows.followMouse(arrows.currentArrowX(i), arrows.currentArrowY(j));
-      arrows.showArrow();
-
-      popMatrix();
-    }
-  }
 }
